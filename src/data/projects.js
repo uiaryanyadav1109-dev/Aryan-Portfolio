@@ -67,7 +67,7 @@ export const projects = [
     ],
     github:
       "https://github.com/sankirtansyadavofficial-Hack/NLAMS-1",
-    demo: null,
+    demo: "https://niladri21.github.io/NLAMS-1/",
   },
 
   {

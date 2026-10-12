@@ -1,5 +1,30 @@
 export const projects = [
   {
+    title: "MedicalAI",
+    category: "AI",
+    status: "Live",
+    description:
+      "AI-assisted clinical intelligence and preliminary triage platform providing multilingual consultations, doctor handoffs, report insights, and emergency assistance.",
+    architecture: "React + TypeScript • Node.js + Express • Google Gemini API • Firebase",
+    highlights: [
+      "AI-driven preliminary triage and clinical conversations powered by Google Gemini with multi-turn context.",
+      "Multilingual health accessibility supporting English, Hindi, Bengali, and Hinglish with voice read-aloud.",
+      "Unified patient & doctor portals with emergency workflows, patient QR codes, and structured care summaries."
+    ],
+    tech: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Express",
+      "Gemini AI",
+      "Firebase",
+      "AI"
+    ],
+    github: "https://github.com/uiaryanyadav1109-dev/MedicalAI",
+    demo: "https://medicalai-1.onrender.com/",
+  },
+
+  {
     title: "StudentOS",
     category: "AI",
     status: "Building",

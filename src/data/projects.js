@@ -25,30 +25,6 @@ export const projects = [
   },
 
   {
-    title: "StudentOS",
-    category: "AI",
-    status: "Building",
-    description:
-      "AI-powered Student Success & Career Platform designed to bring academic assistance, career development, productivity and student opportunities into one ecosystem.",
-    architecture: "Next.js App Router • Node.js Microservices • PostgreSQL • Gemini AI",
-    highlights: [
-      "AI-driven personalized academic roadmap and milestone tracking.",
-      "Integrated resume parser and skill match engine tailored for student internships.",
-      "High-throughput full-stack architecture built on Next.js, Node.js API services, and PostgreSQL."
-    ],
-    tech: [
-      "React",
-      "Next.js",
-      "Node.js",
-      "AI",
-      "PostgreSQL",
-    ],
-    github:
-      "https://github.com/uiaryanyadav1109-dev",
-    demo: null,
-  },
-
-  {
     title: "VoiceShield",
     category: "Security",
     status: "Building",

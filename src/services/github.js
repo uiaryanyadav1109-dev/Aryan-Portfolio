@@ -22,7 +22,7 @@ export const GITHUB_LANGUAGE_COLORS = {
 export const FALLBACK_PROFILE = {
   login: "uiaryanyadav1109-dev",
   name: "Aryan Yadav",
-  bio: "AI/ML & Full-Stack Developer | Building StudentOS, NLAMS & Intelligent Systems",
+  bio: "AI/ML & Full-Stack Developer | Building MedicalAI, NLAMS & Intelligent Systems",
   avatar_url: "/images/developer.png",
   html_url: "https://github.com/uiaryanyadav1109-dev",
   public_repos: 14,
@@ -42,12 +42,12 @@ export const FALLBACK_REPOSITORIES = [
   },
   {
     id: 9102,
-    name: "StudentOS",
-    html_url: "https://github.com/uiaryanyadav1109-dev",
-    description: "AI-powered student career development, academic roadmap tracker, and productivity ecosystem.",
+    name: "MedicalAI",
+    html_url: "https://github.com/uiaryanyadav1109-dev/MedicalAI",
+    description: "AI-assisted clinical intelligence and preliminary triage platform providing multilingual consultations.",
     stargazers_count: 5,
     forks_count: 1,
-    language: "JavaScript",
+    language: "TypeScript",
   },
   {
     id: 9103,
@@ -114,11 +114,11 @@ export const FALLBACK_COMMITS = [
   },
   {
     id: "b2879d0",
-    message: "feat: build student academic roadmap, resume matcher, and milestone tracker",
-    repo: "StudentOS",
-    fullRepo: "uiaryanyadav1109-dev/StudentOS",
+    message: "feat: multilingual clinical consultation triage and report insights with Gemini",
+    repo: "MedicalAI",
+    fullRepo: "uiaryanyadav1109-dev/MedicalAI",
     date: new Date(Date.now() - 3600000 * 78).toISOString(),
-    url: "https://github.com/uiaryanyadav1109-dev",
+    url: "https://github.com/uiaryanyadav1109-dev/MedicalAI",
   },
   {
     id: "e501b8a",

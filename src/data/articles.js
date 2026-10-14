@@ -38,16 +38,16 @@ export const articles = [
     ],
   },
   {
-    id: "student-os-architecture",
+    id: "latency-sensitive-ai-architecture",
     title: "Designing Latency-Sensitive Full-Stack AI Ecosystems",
     category: "System Architecture",
     readTime: "3 min read",
     date: "Dec 2024",
     summary:
-      "Balancing client-side responsiveness and server-side LLM orchestration in StudentOS: caching strategies, streaming tokens, and relational modeling.",
+      "Balancing client-side responsiveness and server-side LLM orchestration in modern AI platforms: caching strategies, streaming tokens, and relational modeling.",
     tags: ["Next.js", "Node.js", "PostgreSQL", "System Design"],
     problem:
-      "LLM inference latency can degrade interactive student workflows if prompts, roadmaps, and career matching queries are treated as blocking synchronous requests.",
+      "LLM inference latency can degrade interactive user workflows if prompts, roadmaps, and career matching queries are treated as blocking synchronous requests.",
     solution:
       "Implemented optimistic UI updates, streaming response tokens via Server-Sent Events, and multi-tier edge caching for common academic curricula and roadmap trees.",
     metrics: [

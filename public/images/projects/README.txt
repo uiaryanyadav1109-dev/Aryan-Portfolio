@@ -1,1 +1,1 @@
-Add studentos.png, voiceshield.png, nlams.png and saral.png.
+Add medicalai.png, voiceshield.png, nlams.png and saral.png.

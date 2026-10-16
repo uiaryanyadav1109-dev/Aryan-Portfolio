@@ -6,6 +6,7 @@ import {
 import {
   FaGithub,
   FaLinkedin,
+  FaInstagram,
 } from "react-icons/fa";
 
 function Footer() {
@@ -32,6 +33,15 @@ function Footer() {
             aria-label="LinkedIn"
           >
             <FaLinkedin size={18} />
+          </a>
+
+          <a
+            href="https://www.instagram.com/itz.aryxn._.01/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+          >
+            <FaInstagram size={18} />
           </a>
 
           <a

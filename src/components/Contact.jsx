@@ -15,6 +15,7 @@ import {
 import {
   FaGithub,
   FaLinkedin,
+  FaInstagram,
 } from "react-icons/fa";
 
 import {
@@ -179,6 +180,16 @@ function Contact() {
               >
                 <FaLinkedin size={19} />
                 LinkedIn
+              </a>
+
+              <a
+                href="https://www.instagram.com/itz.aryxn._.01/"
+                target="_blank"
+                rel="noreferrer"
+                className="contact-link"
+              >
+                <FaInstagram size={19} />
+                Instagram
               </a>
 
               <a

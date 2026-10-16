@@ -18,7 +18,7 @@ import {
   Check,
   CornerDownLeft,
 } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 function CommandPalette({ isOpen, onClose }) {
   const [query, setQuery] = useState("");
@@ -191,6 +191,18 @@ function CommandPalette({ isOpen, onClose }) {
       action: () => {
         window.open(
           "https://www.linkedin.com/in/aryan-yadav-dev01/",
+          "_blank"
+        );
+      },
+    },
+    {
+      id: "link-instagram",
+      group: "Profiles",
+      title: "Open Instagram Profile",
+      icon: FaInstagram,
+      action: () => {
+        window.open(
+          "https://www.instagram.com/itz.aryxn._.01/",
           "_blank"
         );
       },

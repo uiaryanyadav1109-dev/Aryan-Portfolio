@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowDown, Sparkles, MapPin, Clock, Code2, Cpu } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const roles = [
   "AI / ML Enthusiast",
@@ -166,6 +166,16 @@ function Hero() {
             >
               <FaLinkedin size={18} />
               LinkedIn
+            </a>
+
+            <a
+              href="https://www.instagram.com/itz.aryxn._.01/"
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-secondary"
+            >
+              <FaInstagram size={18} />
+              Instagram
             </a>
           </div>
         </div>

@@ -41,6 +41,12 @@ export default function HeatmapSnakeOverlay({
 
   const activeRef = useRef(active);
   activeRef.current = active;
+  const prevActiveRef = useRef(false);
+
+  const onConsumeCellRef = useRef(onConsumeCell);
+  onConsumeCellRef.current = onConsumeCell;
+  const onResetConsumedRef = useRef(onResetConsumed);
+  onResetConsumedRef.current = onResetConsumed;
 
   const eatenSetRef = useRef(new Set());
   const snakeRef = useRef(snake);
@@ -50,18 +56,22 @@ export default function HeatmapSnakeOverlay({
 
   useEffect(() => {
     if (!active) {
-      eatenSetRef.current.clear();
-      setChompEffect(null);
-      setSnake([
-        { x: 4, y: 2 },
-        { x: 3, y: 2 },
-        { x: 2, y: 2 },
-        { x: 1, y: 2 },
-      ]);
-      setDirection({ x: 1, y: 0 });
-      onResetConsumed?.();
+      if (prevActiveRef.current) {
+        eatenSetRef.current.clear();
+        setChompEffect(null);
+        setSnake([
+          { x: 4, y: 2 },
+          { x: 3, y: 2 },
+          { x: 2, y: 2 },
+          { x: 1, y: 2 },
+        ]);
+        setDirection({ x: 1, y: 0 });
+        onResetConsumedRef.current?.();
+      }
+      prevActiveRef.current = false;
       return;
     }
+    prevActiveRef.current = true;
 
     // If reduced-motion is requested, show static peaceful snake without starting timer
     if (reducedMotion) {
@@ -172,7 +182,7 @@ export default function HeatmapSnakeOverlay({
         eatenSetRef.current.add(foodKey);
         didEat = true;
         // Trigger visual consumption on the underlying heatmap cell
-        onConsumeCell?.(newHeadX, newHeadY);
+        onConsumeCellRef.current?.(newHeadX, newHeadY);
         setChompEffect({ x: newHeadX, y: newHeadY, key: Date.now() });
       }
 
@@ -196,7 +206,7 @@ export default function HeatmapSnakeOverlay({
       isCancelled = true;
       if (timerId) clearTimeout(timerId);
     };
-  }, [active, contributionCoords, reducedMotion, onConsumeCell, onResetConsumed]);
+  }, [active, contributionCoords, reducedMotion]);
 
   if (!active) return null;
 

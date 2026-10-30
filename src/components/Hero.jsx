@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
-import { ArrowDown, Sparkles, MapPin, Clock, Code2, Cpu } from "lucide-react";
+import {
+  ArrowDown,
+  Sparkles,
+  Award,
+  FileText,
+  Mail,
+  Code2,
+  Cpu,
+} from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const roles = [
-  "AI / ML Enthusiast",
+  "Aspiring AI/ML Engineer",
   "Full-Stack Developer",
-  "Generative AI Explorer",
-  "Hardware & IoT Builder",
-  "Hackathon Developer",
+  "Generative AI Enthusiast",
+  "Rapid Hackathon Builder",
+  "Hardware & IoT Explorer",
 ];
 
 function Hero() {
@@ -27,66 +35,28 @@ function Hero() {
     setTilt({ x: 0, y: 0 });
   };
 
-  // Live Kolkata (IST) clock
-  const [localTime, setLocalTime] = useState(() => {
-    return new Intl.DateTimeFormat("en-US", {
-      timeZone: "Asia/Kolkata",
-      hour: "numeric",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    }).format(new Date());
-  });
-
-  useEffect(() => {
-    const updateTime = () => {
-      setLocalTime(
-        new Intl.DateTimeFormat("en-US", {
-          timeZone: "Asia/Kolkata",
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        }).format(new Date())
-      );
-    };
-
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const currentRole = roles[roleIndex];
-    const typingSpeed = isDeleting ? 45 : 90;
+    const typingSpeed = isDeleting ? 40 : 80;
 
     const timer = setTimeout(() => {
       if (!isDeleting) {
-        const nextText = currentRole.substring(
-          0,
-          text.length + 1
-        );
-
+        const nextText = currentRole.substring(0, text.length + 1);
         setText(nextText);
 
         if (nextText === currentRole) {
           setTimeout(() => {
             setIsDeleting(true);
-          }, 1200);
+          }, 1400);
         }
       } else {
-        const nextText = currentRole.substring(
-          0,
-          text.length - 1
-        );
-
+        const nextText = currentRole.substring(0, text.length - 1);
         setText(nextText);
 
         if (nextText === "") {
           setIsDeleting(false);
-          setRoleIndex(
-            (prevIndex) =>
-              (prevIndex + 1) % roles.length
-          );
+          setRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
         }
       }
     }, typingSpeed);
@@ -97,90 +67,112 @@ function Hero() {
   return (
     <section id="home" className="hero">
       <div className="container hero-container">
-
         {/* LEFT SIDE */}
         <div className="hero-content fade-up">
-          <div className="hero-status-pills">
-            <div className="hero-badge">
-              <span className="status-dot"></span>
-              OPEN TO BUILD & COLLABORATE
-            </div>
-
-            <div
-              className="hero-time-pill"
-              title="Live Local Time in Kolkata, India (IST)"
-            >
-              <MapPin size={13} className="time-pill-icon" />
-              <span>Kolkata, IN</span>
-              <span className="time-pill-dot">•</span>
-              <Clock size={13} className="time-pill-icon" />
-              <span className="time-pill-live">{localTime} IST</span>
-            </div>
-          </div>
 
           <h1>
-            Hi, I'm{" "}
-            <span className="gradient-text">
-              Aryan Yadav.
-            </span>
+            Hi, I'm <span className="gradient-text">Aryan Yadav.</span>
           </h1>
 
-
-          <div className="hero-role">
-            I'm a{" "}
-            <span className="gradient-text">
-              {text}
-            </span>
-            <span className="cursor">|</span>
+          <div className="hero-role-wrapper">
+            <div className="hero-role-subtitle">
+              Aspiring AI/ML Engineer • Full-Stack Developer • Generative AI Enthusiast
+            </div>
+            <div className="hero-role">
+              Specializing in <span className="gradient-text">{text}</span>
+              <span className="cursor">|</span>
+            </div>
           </div>
 
           <p className="hero-description">
-            I build AI-powered applications,
-            full-stack products, and experimental
-            hardware projects. I enjoy turning ideas
-            into real-world technology through
-            code, AI, and continuous learning.
+            I'm a Computer Science student passionate about AI, full-stack
+            development, and building technology that solves real-world
+            problems. Through projects and hackathons, I explore new ideas,
+            develop practical solutions, and continuously strengthen my
+            engineering skills.
           </p>
 
+          {/* 4 PRIMARY CALL-TO-ACTION BUTTONS */}
           <div className="hero-buttons">
             <a href="#projects" className="btn btn-primary">
-              <Sparkles size={18} />
-              View My Projects
+              <Sparkles size={17} />
+              View Projects
+            </a>
+
+            <a href="#certifications" className="btn btn-secondary">
+              <Award size={17} />
+              Explore Certifications
             </a>
 
             <a
-              href="https://github.com/uiaryanyadav1109-dev"
+              href="/resume/Aryan_Yadav_Resume.pdf"
+              download="Aryan_Yadav_Resume.pdf"
               target="_blank"
               rel="noreferrer"
               className="btn btn-secondary"
             >
-              <FaGithub size={18} />
-              GitHub
+              <FileText size={17} />
+              Download Resume
             </a>
 
-            <a
-              href="https://www.linkedin.com/in/aryan-yadav-dev01/"
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-secondary"
-            >
-              <FaLinkedin size={18} />
-              LinkedIn
+            <a href="#contact" className="btn btn-secondary">
+              <Mail size={17} />
+              Contact Me
             </a>
+          </div>
 
-            <a
-              href="https://www.instagram.com/itz.aryxn._.01/"
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-secondary"
-            >
-              <FaInstagram size={18} />
-              Instagram
-            </a>
+          {/* SOCIAL LINKS ROW */}
+          <div className="hero-social-row">
+            <span className="hero-social-label">Connect:</span>
+            <div className="hero-social-links">
+              <a
+                href="https://github.com/uiaryanyadav1109-dev"
+                target="_blank"
+                rel="noreferrer"
+                className="hero-social-icon"
+                title="GitHub Profile"
+                aria-label="GitHub Profile"
+              >
+                <FaGithub size={17} />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/aryan-yadav-dev01/"
+                target="_blank"
+                rel="noreferrer"
+                className="hero-social-icon"
+                title="LinkedIn Profile"
+                aria-label="LinkedIn Profile"
+              >
+                <FaLinkedin size={17} />
+              </a>
+
+              <a
+                href="https://www.instagram.com/itz.aryxn._.01/"
+                target="_blank"
+                rel="noreferrer"
+                className="hero-social-icon"
+                title="Instagram Profile"
+                aria-label="Instagram Profile"
+              >
+                <FaInstagram size={17} />
+              </a>
+
+              <a
+                href="https://leetcode.com/u/aryanyadav_11/"
+                target="_blank"
+                rel="noreferrer"
+                className="hero-social-icon"
+                title="LeetCode Profile"
+                aria-label="LeetCode Profile"
+              >
+                <Code2 size={17} />
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* RIGHT SIDE — YOUR PHOTO WITH 3D TILT & FLOATING BADGES */}
+        {/* RIGHT SIDE — PHOTO WITH 3D TILT & FLOATING BADGES */}
         <div
           className="hero-image-wrapper"
           onMouseMove={handleImageMouseMove}
@@ -197,14 +189,14 @@ function Hero() {
 
           <img
             src="/images/developer.png"
-            alt="Aryan Yadav"
+            alt="Aryan Yadav - AI/ML Engineer & Full-Stack Developer"
             className="hero-image"
           />
 
           {/* Floating tech satellite chips */}
-          <div className="hero-floating-chip chip-ai" title="AI & Deep Learning">
+          <div className="hero-floating-chip chip-ai" title="AI & Machine Learning">
             <Sparkles size={13} className="chip-icon-ai" />
-            <span>AI / ML Builder</span>
+            <span>AI / ML & LLMs</span>
           </div>
 
           <div className="hero-floating-chip chip-dev" title="Full-Stack Engineering">
@@ -212,7 +204,7 @@ function Hero() {
             <span>Full-Stack</span>
           </div>
 
-          <div className="hero-floating-chip chip-iot" title="IoT & Embedded Systems">
+          <div className="hero-floating-chip chip-iot" title="IoT & Embedded Hardware">
             <Cpu size={13} className="chip-icon-iot" />
             <span>IoT & Hardware</span>
           </div>
@@ -225,7 +217,6 @@ function Hero() {
         >
           <ArrowDown size={18} />
         </a>
-
       </div>
     </section>
   );

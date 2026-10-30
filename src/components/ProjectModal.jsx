@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   Cpu,
   Sparkles,
+  Info,
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
@@ -68,6 +69,17 @@ function ProjectModal({ project, onClose }) {
             {project.title}
           </h2>
 
+          {project.subtitle && (
+            <p className="project-modal-subtitle">{project.subtitle}</p>
+          )}
+
+          {project.disclaimer && (
+            <div className="project-modal-disclaimer">
+              <Info size={16} className="disclaimer-icon" />
+              <span>{project.disclaimer}</span>
+            </div>
+          )}
+
           {project.architecture && (
             <div className="project-modal-arch">
               <Cpu size={15} className="arch-icon" />
@@ -81,7 +93,7 @@ function ProjectModal({ project, onClose }) {
           {project.highlights && project.highlights.length > 0 && (
             <div className="project-modal-section">
               <h4 className="project-modal-section-title">
-                <Sparkles size={16} /> Key Capabilities & Architecture
+                <Sparkles size={16} /> Key Capabilities & Implementation
               </h4>
               <ul className="project-highlights-list">
                 {project.highlights.map((highlight, idx) => (
@@ -111,15 +123,17 @@ function ProjectModal({ project, onClose }) {
         {/* MODAL FOOTER */}
         <div className="project-modal-footer">
           <div className="modal-actions-left">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-secondary modal-btn"
-            >
-              <FaGithub size={16} />
-              View Source
-            </a>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-secondary modal-btn"
+              >
+                <FaGithub size={16} />
+                View Source
+              </a>
+            )}
 
             {project.demo && project.demo !== "#" && (
               <a
@@ -148,4 +162,3 @@ function ProjectModal({ project, onClose }) {
 }
 
 export default ProjectModal;
-

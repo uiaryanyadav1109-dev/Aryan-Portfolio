@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import {
-  Code2,
   Send,
   CheckCircle2,
   AlertCircle,
@@ -10,17 +9,10 @@ import {
   Check,
   MapPin,
   Clock,
+  Sparkles,
 } from "lucide-react";
 
-import {
-  FaGithub,
-  FaLinkedin,
-  FaInstagram,
-} from "react-icons/fa";
-
-import {
-  submitContactForm,
-} from "../services/contact";
+import { submitContactForm } from "../services/contact";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -84,7 +76,6 @@ function Contact() {
       [name]: value,
     }));
 
-    // Clear feedback when user starts editing again
     if (feedback.type === "error") {
       setFeedback({ type: null, message: "" });
     }
@@ -104,7 +95,6 @@ function Contact() {
         message: result.message,
       });
 
-      // Reset form fields on success
       setFormData({
         name: "",
         email: "",
@@ -132,88 +122,61 @@ function Contact() {
           </h2>
 
           <p>
-            Have an idea, project, hackathon,
-            collaboration or simply want to connect?
-            Feel free to reach out.
+            Have an idea, project, hackathon, collaboration or simply want to
+            connect? Feel free to reach out.
           </p>
         </div>
 
         <div className="contact-grid">
+          {/* LEFT: DIRECT CONTACT INFO */}
           <div className="contact-info">
             <h3>Let's connect.</h3>
 
             <p>
-              I'm always interested in discussing
-              interesting ideas, AI projects,
-              full-stack applications and
-              technology experiments.
+              I'm always interested in discussing interesting ideas, AI
+              projects, full-stack applications and technology experiments.
             </p>
 
+            {/* LOCATION & TIME CARD */}
             <div className="contact-location-card">
               <div className="contact-location-header">
-                <MapPin size={15} className="contact-location-icon" />
-                <span>Kolkata, India <strong>(IST)</strong></span>
+                <MapPin size={16} className="contact-location-icon" />
+                <span>
+                  Kolkata, India <strong>(IST)</strong>
+                </span>
               </div>
               <div className="contact-location-time">
-                <Clock size={14} className="contact-time-icon" />
-                <span>Local Time: <strong>{localTime}</strong></span>
-                <span className="contact-live-dot" title="Active timezone"></span>
+                <Clock size={15} className="contact-time-icon" />
+                <span>
+                  Local Time: <strong>{localTime}</strong>
+                </span>
+                <span
+                  className="contact-live-dot"
+                  title="Active timezone"
+                ></span>
               </div>
             </div>
 
-            <div className="contact-links">
-              <a
-                href="https://github.com/uiaryanyadav1109-dev"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-link"
-              >
-                <FaGithub size={19} />
-                GitHub
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/aryan-yadav-dev01/"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-link"
-              >
-                <FaLinkedin size={19} />
-                LinkedIn
-              </a>
-
-              <a
-                href="https://www.instagram.com/itz.aryxn._.01/"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-link"
-              >
-                <FaInstagram size={19} />
-                Instagram
-              </a>
-
-              <a
-                href="https://leetcode.com/u/aryanyadav_11/"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-link"
-              >
-                <Code2 size={19} />
-                LeetCode
-              </a>
-
-              <div className="contact-link-with-copy">
-                <a
-                  href="mailto:uiaryanyadav1109@gmail.com"
-                  className="contact-link"
-                >
-                  <Mail size={19} />
-                  <span>uiaryanyadav1109@gmail.com</span>
-                </a>
-
+            {/* DIRECT CONTACT METHODS (EMAIL & PHONE WITH COPY) */}
+            <div className="contact-methods">
+              <div className="contact-method-card">
+                <div className="contact-method-icon">
+                  <Mail size={18} />
+                </div>
+                <div className="contact-method-details">
+                  <span className="contact-method-label">Direct Email</span>
+                  <a
+                    href="mailto:uiaryanyadav1109@gmail.com"
+                    className="contact-method-value"
+                  >
+                    uiaryanyadav1109@gmail.com
+                  </a>
+                </div>
                 <button
                   type="button"
-                  className="contact-copy-btn"
+                  className={`contact-copy-btn ${
+                    copiedField === "email" ? "copied" : ""
+                  }`}
                   onClick={(e) =>
                     handleCopy("uiaryanyadav1109@gmail.com", "email", e)
                   }
@@ -221,27 +184,37 @@ function Contact() {
                   aria-label="Copy email to clipboard"
                 >
                   {copiedField === "email" ? (
-                    <span className="copy-feedback">
-                      <Check size={14} /> Copied!
-                    </span>
+                    <>
+                      <Check size={13} />
+                      <span>Copied!</span>
+                    </>
                   ) : (
-                    <Copy size={15} />
+                    <>
+                      <Copy size={13} />
+                      <span>Copy</span>
+                    </>
                   )}
                 </button>
               </div>
 
-              <div className="contact-link-with-copy">
-                <a
-                  href="tel:+916289492367"
-                  className="contact-link"
-                >
-                  <Phone size={19} />
-                  <span>+91 6289492367</span>
-                </a>
-
+              <div className="contact-method-card">
+                <div className="contact-method-icon">
+                  <Phone size={18} />
+                </div>
+                <div className="contact-method-details">
+                  <span className="contact-method-label">Phone & WhatsApp</span>
+                  <a
+                    href="tel:+916289492367"
+                    className="contact-method-value"
+                  >
+                    +91 6289492367
+                  </a>
+                </div>
                 <button
                   type="button"
-                  className="contact-copy-btn"
+                  className={`contact-copy-btn ${
+                    copiedField === "phone" ? "copied" : ""
+                  }`}
                   onClick={(e) =>
                     handleCopy("+916289492367", "phone", e)
                   }
@@ -249,17 +222,29 @@ function Contact() {
                   aria-label="Copy phone number to clipboard"
                 >
                   {copiedField === "phone" ? (
-                    <span className="copy-feedback">
-                      <Check size={14} /> Copied!
-                    </span>
+                    <>
+                      <Check size={13} />
+                      <span>Copied!</span>
+                    </>
                   ) : (
-                    <Copy size={15} />
+                    <>
+                      <Copy size={13} />
+                      <span>Copy</span>
+                    </>
                   )}
                 </button>
+              </div>
+
+              <div className="contact-status-card">
+                <Sparkles size={16} className="contact-status-icon" />
+                <span>
+                  Available for AI / Full-Stack opportunities & hackathons • Typically responds within 24h
+                </span>
               </div>
             </div>
           </div>
 
+          {/* RIGHT: CONTACT FORM */}
           <form
             className="contact-form spotlight-card"
             onSubmit={handleSubmit}
@@ -287,9 +272,7 @@ function Contact() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="name">
-                Name
-              </label>
+              <label htmlFor="name">Name</label>
 
               <input
                 id="name"
@@ -306,9 +289,7 @@ function Contact() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">
-                Email
-              </label>
+              <label htmlFor="email">Email</label>
 
               <input
                 id="email"
@@ -323,9 +304,7 @@ function Contact() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="message">
-                Message
-              </label>
+              <label htmlFor="message">Message</label>
 
               <textarea
                 id="message"
@@ -342,14 +321,12 @@ function Contact() {
 
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary contact-submit-btn"
               disabled={sending}
             >
               <Send size={17} />
 
-              {sending
-                ? "Sending..."
-                : "Send Message"}
+              {sending ? "Sending..." : "Send Message"}
             </button>
 
             {feedback.message && (

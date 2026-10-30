@@ -30,6 +30,8 @@ function timeAgo(dateString) {
   return `${diffMonths}mo ago`;
 }
 
+const MONO_SHADES = ["#F7E5DC", "#D6A58D", "#C49077", "#9E7664", "#765B50", "#4A3B34"];
+
 function GitHub() {
   const {
     profile,
@@ -123,7 +125,7 @@ function GitHub() {
                         className="github-lang-segment"
                         style={{
                           width: `${Math.max(lang.percentage, 3)}%`,
-                          backgroundColor: lang.color,
+                          backgroundColor: MONO_SHADES[languages.indexOf(lang) % MONO_SHADES.length],
                         }}
                         title={`${lang.name}: ${lang.percentage}%`}
                       />
@@ -136,7 +138,7 @@ function GitHub() {
                       <div key={lang.name} className="lang-legend-item">
                         <span
                           className="lang-legend-dot"
-                          style={{ backgroundColor: lang.color }}
+                          style={{ backgroundColor: MONO_SHADES[languages.indexOf(lang) % MONO_SHADES.length] }}
                         />
                         <span className="lang-name">{lang.name}</span>
                         <span className="lang-pct">{lang.percentage}%</span>

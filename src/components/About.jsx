@@ -6,16 +6,19 @@ import {
   Rocket,
   Gamepad2,
   Sparkles,
+  Headphones,
+  Film,
+  Compass,
 } from "lucide-react";
 
 const interests = [
-  { emoji: "💻", label: "Coding", desc: "Software & Systems Architecture" },
-  { emoji: "🎮", label: "Gaming", desc: "Strategy & Immersive RPGs" },
-  { emoji: "🤖", label: "AI / ML", desc: "Deep Learning & Generative AI" },
-  { emoji: "🎧", label: "Music", desc: "Lo-Fi, Synthwave & Beats" },
-  { emoji: "🎌", label: "Anime", desc: "Storytelling & Visual Art" },
-  { emoji: "✈️", label: "Travelling", desc: "Exploring New Horizons & Cultures" },
-  { emoji: "🚀", label: "Exploring New Tech", desc: "Tinkering with Cutting-Edge Tools" },
+  { icon: Code2, label: "Coding", desc: "Software & Systems Architecture" },
+  { icon: Gamepad2, label: "Gaming", desc: "Strategy & Immersive RPGs" },
+  { icon: BrainCircuit, label: "AI / ML", desc: "Deep Learning & Generative AI" },
+  { icon: Headphones, label: "Music", desc: "Lo-Fi, Synthwave & Beats" },
+  { icon: Film, label: "Anime", desc: "Storytelling & Visual Art" },
+  { icon: Compass, label: "Travelling", desc: "Exploring New Horizons & Cultures" },
+  { icon: Rocket, label: "Exploring New Tech", desc: "Tinkering with Cutting-Edge Tools" },
 ];
 
 const snapshotItems = [
@@ -23,37 +26,37 @@ const snapshotItems = [
     icon: GraduationCap,
     label: "Education",
     value: "B.Tech — CST",
-    accent: "blue",
+    accent: "mono",
   },
   {
     icon: BrainCircuit,
     label: "Focus",
     value: "AI / ML",
-    accent: "purple",
+    accent: "mono",
   },
   {
     icon: Code2,
     label: "Development",
     value: "Full-Stack",
-    accent: "cyan",
+    accent: "mono",
   },
   {
     icon: Cpu,
     label: "Hardware",
     value: "IoT / Embedded",
-    accent: "orange",
+    accent: "mono",
   },
   {
     icon: Rocket,
     label: "Building",
     value: "Real-World Products",
-    accent: "green",
+    accent: "mono",
   },
   {
     icon: Gamepad2,
     label: "Interests",
     value: "Tech & Gaming",
-    accent: "purple",
+    accent: "mono",
   },
 ];
 
@@ -124,7 +127,7 @@ function About() {
                     key={item.label}
                     title={item.desc}
                   >
-                    <span className="interest-emoji">{item.emoji}</span>
+                    <item.icon size={15} className="interest-icon-svg" />
                     <span className="interest-text">{item.label}</span>
                   </div>
                 ))}

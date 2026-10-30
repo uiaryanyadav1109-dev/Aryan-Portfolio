@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
 
 import Navbar from "./components/Navbar";
@@ -7,6 +7,7 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Hackathons from "./components/Hackathons";
+import Certifications from "./components/Certifications";
 import GitHub from "./components/GitHub";
 import LeetCode from "./components/LeetCode";
 import Resume from "./components/Resume";
@@ -17,6 +18,7 @@ import NotFound from "./components/NotFound";
 import CareerSnapshot from "./components/CareerSnapshot";
 import CommandPalette from "./components/CommandPalette";
 import BackgroundMotion from "./components/BackgroundMotion";
+import RainBackground from "./components/RainBackground";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -96,7 +98,7 @@ function App() {
     if (loading) return;
 
     const targets = document.querySelectorAll(
-      ".section-title, .about-card, .career-card, .skill-card, .project-card, .hackathon-card, .github-card, .leetcode-dashboard, .resume-box, .contact-form, .contact-info"
+      ".section-title, .about-card, .career-card, .skill-card, .project-card, .hackathon-card, .cert-card, .github-card, .leetcode-dashboard, .resume-box, .contact-form, .contact-info"
     );
 
     targets.forEach((el) => el.classList.add("reveal-on-scroll"));
@@ -128,12 +130,50 @@ function App() {
     "/resume/..."        → Resume PDF
     anything else        → 404 page
   */
-  const pathname = window.location.pathname;
+  const [currentPath, setCurrentPath] = useState(() => {
+    if (typeof window === "undefined") return "/";
+    return window.location.pathname;
+  });
 
-  const isHomePage = pathname === "/";
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    const handleCustomNavigate = (e) => {
+      const target = e.detail?.path || "/";
+      if (target.includes("#")) {
+        const [path, hash] = target.split("#");
+        const resolvedPath = path || "/";
+        window.history.pushState({}, "", target);
+        setCurrentPath(resolvedPath);
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 120);
+      } else {
+        window.history.pushState({}, "", target);
+        setCurrentPath(target);
+      }
+    };
+
+    window.addEventListener("popstate", handleLocationChange);
+    window.addEventListener("navigate-to", handleCustomNavigate);
+
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+      window.removeEventListener("navigate-to", handleCustomNavigate);
+    };
+  }, []);
+
+  const pathname = currentPath;
+
+  const normalizedPath = pathname.replace(/\/index\.html$/, "/").replace(/\/+$/, "") || "/";
+  const isHomePage = normalizedPath === "/";
   const isResumePath = pathname.startsWith("/resume/");
+  const isCertificatePath = pathname.startsWith("/certificates/");
 
-  const isNotFound = !isHomePage && !isResumePath;
+  const isNotFound = !isHomePage && !isResumePath && !isCertificatePath;
 
   /*
     Show loading screen first
@@ -146,14 +186,22 @@ function App() {
     Show custom 404 page
   */
   if (isNotFound) {
-    return <NotFound />;
+    return (
+      <NotFound
+        onNavigate={(target) => {
+          window.dispatchEvent(
+            new CustomEvent("navigate-to", { detail: { path: target } })
+          );
+        }}
+      />
+    );
   }
 
   /*
     Resume files are handled directly by Vite.
     React doesn't need to render the portfolio there.
   */
-  if (isResumePath) {
+  if (isResumePath || isCertificatePath) {
     return null;
   }
 
@@ -171,6 +219,7 @@ function App() {
 
       {/* Ambient dynamic background motion */}
       <BackgroundMotion />
+      <RainBackground />
 
       <Navbar />
 
@@ -181,6 +230,7 @@ function App() {
         <Skills />
         <Projects />
         <Hackathons />
+        <Certifications />
         <GitHub />
         <LeetCode />
         <Resume />

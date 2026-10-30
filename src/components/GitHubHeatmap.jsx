@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from "react";
-import { ExternalLink, RefreshCw } from "lucide-react";
+import { ExternalLink, RefreshCw, Sparkles } from "lucide-react";
 import HeatmapSnakeOverlay from "./HeatmapSnakeOverlay";
 
 function formatContributionDate(dateStr) {
@@ -209,7 +209,7 @@ function GitHubHeatmap({ username = "uiaryanyadav1109-dev" }) {
             }
             aria-pressed={snakeActive}
           >
-            <span className="snake-toggle-emoji">🐍</span>
+            <Sparkles size={13} className="snake-toggle-icon" />
             <span className="snake-toggle-label">
               Snake {snakeActive ? (prefersReducedMotion ? "ON (Static)" : "ON") : "OFF"}
             </span>

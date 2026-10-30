@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Sun, Moon, Search } from "lucide-react";
+import { Menu, X, Sun, Moon, Search, CloudRain, CloudOff } from "lucide-react";
 
 const NAV_SECTIONS = [
   { id: "about", label: "About" },
@@ -7,6 +7,7 @@ const NAV_SECTIONS = [
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
   { id: "hackathons", label: "Hackathons" },
+  { id: "certifications", label: "Certifications" },
   { id: "github", label: "GitHub" },
   { id: "leetcode", label: "LeetCode" },
   { id: "contact", label: "Contact" },
@@ -24,6 +25,46 @@ function Navbar() {
     }
     return true;
   });
+
+  const [rainIntensity, setRainIntensity] = useState(() => {
+    if (typeof window === "undefined") return "subtle";
+    const saved = localStorage.getItem("aryan_portfolio_rain_mode");
+    if (saved && ["off", "subtle", "normal", "heavy"].includes(saved)) {
+      return saved;
+    }
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return prefersReduced ? "off" : "subtle";
+  });
+
+  useEffect(() => {
+    const handleRainChange = (e) => {
+      const mode = e.detail?.mode;
+      if (mode) setRainIntensity(mode);
+    };
+    window.addEventListener("set-rain-intensity", handleRainChange);
+    return () => window.removeEventListener("set-rain-intensity", handleRainChange);
+  }, []);
+
+  const cycleRain = () => {
+    const order = ["subtle", "normal", "heavy", "off"];
+    const currentIndex = order.indexOf(rainIntensity);
+    const nextMode = order[(currentIndex + 1) % order.length];
+    setRainIntensity(nextMode);
+    localStorage.setItem("aryan_portfolio_rain_mode", nextMode);
+    window.dispatchEvent(
+      new CustomEvent("set-rain-intensity", { detail: { mode: nextMode } })
+    );
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -125,6 +166,22 @@ function Navbar() {
             }
           >
             {darkMode ? <Sun size={19} /> : <Moon size={19} />}
+          </button>
+
+          {/* RAIN ATMOSPHERE TOGGLE */}
+          <button
+            type="button"
+            className={`rain-toggle-btn ${rainIntensity !== "off" ? "active" : ""}`}
+            onClick={cycleRain}
+            title={`Rain Atmosphere: ${rainIntensity.charAt(0).toUpperCase() + rainIntensity.slice(1)} (Click to switch)`}
+            aria-label={`Rain Atmosphere: ${rainIntensity}. Click to cycle mode.`}
+          >
+            {rainIntensity === "off" ? (
+              <CloudOff size={18} />
+            ) : (
+              <CloudRain size={18} />
+            )}
+            <span className={`rain-indicator-dot rain-dot-${rainIntensity}`} />
           </button>
 
           {/* MOBILE MENU TOGGLE */}

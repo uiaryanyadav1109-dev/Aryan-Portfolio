@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import {
+  Award,
   Search,
   X,
   Home,
@@ -17,6 +18,8 @@ import {
   ExternalLink,
   Check,
   CornerDownLeft,
+  CloudRain,
+  CloudOff,
 } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
@@ -91,6 +94,16 @@ function CommandPalette({ isOpen, onClose }) {
       },
     },
     {
+      id: "nav-certifications",
+      group: "Navigation",
+      title: "Go to Technical Certifications",
+      icon: Award,
+      action: () => {
+        const el = document.getElementById("certifications");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      },
+    },
+    {
       id: "nav-github",
       group: "Navigation",
       title: "Go to GitHub Overview",
@@ -139,6 +152,59 @@ function CommandPalette({ isOpen, onClose }) {
       icon: Sun,
       action: () => {
         window.dispatchEvent(new CustomEvent("toggle-theme"));
+      },
+    },
+    {
+      id: "action-rain-cycle",
+      group: "Quick Actions",
+      title: "Cycle Rain Atmosphere (Subtle / Normal / Heavy / Off)",
+      icon: CloudRain,
+      action: () => {
+        window.dispatchEvent(new CustomEvent("toggle-rain"));
+      },
+    },
+    {
+      id: "action-rain-subtle",
+      group: "Atmosphere",
+      title: "Set Rain: Subtle (Cinematic Default)",
+      icon: CloudRain,
+      action: () => {
+        window.dispatchEvent(
+          new CustomEvent("set-rain-intensity", { detail: { mode: "subtle" } })
+        );
+      },
+    },
+    {
+      id: "action-rain-normal",
+      group: "Atmosphere",
+      title: "Set Rain: Normal (Moderate Rain)",
+      icon: CloudRain,
+      action: () => {
+        window.dispatchEvent(
+          new CustomEvent("set-rain-intensity", { detail: { mode: "normal" } })
+        );
+      },
+    },
+    {
+      id: "action-rain-heavy",
+      group: "Atmosphere",
+      title: "Set Rain: Heavy (Immersive Shower)",
+      icon: CloudRain,
+      action: () => {
+        window.dispatchEvent(
+          new CustomEvent("set-rain-intensity", { detail: { mode: "heavy" } })
+        );
+      },
+    },
+    {
+      id: "action-rain-off",
+      group: "Atmosphere",
+      title: "Turn Rain Off",
+      icon: CloudOff,
+      action: () => {
+        window.dispatchEvent(
+          new CustomEvent("set-rain-intensity", { detail: { mode: "off" } })
+        );
       },
     },
     {

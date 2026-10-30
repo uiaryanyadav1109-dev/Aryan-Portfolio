@@ -7,7 +7,6 @@ import ProjectModal from "./ProjectModal";
 const filters = [
   "All",
   "AI",
-  "ML",
   "Full-Stack",
   "Security",
 ];
@@ -27,6 +26,7 @@ function Projects() {
 
     const matchesSearch =
       project.title.toLowerCase().includes(q) ||
+      (project.subtitle && project.subtitle.toLowerCase().includes(q)) ||
       project.description.toLowerCase().includes(q) ||
       project.tech.some((t) => t.toLowerCase().includes(q)) ||
       (project.architecture && project.architecture.toLowerCase().includes(q));
@@ -45,8 +45,8 @@ function Projects() {
           </h2>
 
           <p>
-            Projects where software, AI and real-world
-            problem solving come together. Click any project to inspect architecture and details.
+            Real-world systems where software engineering, artificial intelligence,
+            and user experience meet. Click any project card to inspect architecture and key implementation details.
           </p>
         </div>
 
@@ -57,7 +57,7 @@ function Projects() {
             <input
               type="text"
               className="project-search-input"
-              placeholder="Search projects by tech (e.g. Python, AI, React)..."
+              placeholder="Search projects by tech (e.g. Gemini, Python, React, FastAPI)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -139,6 +139,9 @@ function Projects() {
                 </div>
 
                 <h3>{project.title}</h3>
+                {project.subtitle && (
+                  <div className="project-card-subtitle">{project.subtitle}</div>
+                )}
 
                 <p>{project.description}</p>
 
@@ -152,14 +155,16 @@ function Projects() {
                   className="project-links"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <FaGithub size={15} />
-                    GitHub
-                  </a>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <FaGithub size={15} />
+                      GitHub
+                    </a>
+                  )}
 
                   {Boolean(project.demo && project.demo !== "#") && (
                     <a

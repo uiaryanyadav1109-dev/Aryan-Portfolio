@@ -125,7 +125,6 @@ function App() {
 
   /*
     Check whether the current URL is a valid page.
-
     "/"                  → Portfolio
     "/resume/..."        → Resume PDF
     anything else        → 404 page
@@ -176,13 +175,6 @@ function App() {
   const isNotFound = !isHomePage && !isResumePath && !isCertificatePath;
 
   /*
-    Show loading screen first
-  */
-  if (loading) {
-    return <LoadingScreen onComplete={() => setLoading(false)} />;
-  }
-
-  /*
     Show custom 404 page
   */
   if (isNotFound) {
@@ -206,10 +198,12 @@ function App() {
   }
 
   /*
-    Main portfolio
+    Main portfolio with seamless loading screen overlay reveal
   */
   return (
     <>
+      {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
+
       {/* Top Scroll Progress Bar */}
       <div
         className="scroll-progress-bar"
